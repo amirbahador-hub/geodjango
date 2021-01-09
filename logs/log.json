@@ -1,0 +1,9 @@
+[
+
+    {"request_id": "ef62a27f-b593-41d9-b675-f4338c3ff6a7", "user_id": null, "ip": "127.0.0.1", "request": "<WSGIRequest: GET '/'>", "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36", "event": "request_started", "timestamp": "2021-01-09T19:06:51.825331Z", "logger": "django_structlog.middlewares.request", "level": "info"},
+    {"request_id": "ef62a27f-b593-41d9-b675-f4338c3ff6a7", "user_id": null, "ip": "127.0.0.1", "product": "\u0631\u0628 \u06af\u0648\u062c\u0647", "weight": 250, "brand": "\u062a\u0628\u0631\u06a9", "timestamp": "2021-01-09T19:06:51.826046Z", "logger": "django_structlog", "level": "info"},
+    {"request_id": "ef62a27f-b593-41d9-b675-f4338c3ff6a7", "user_id": null, "ip": "127.0.0.1", "code": 200, "request": "<WSGIRequest: GET '/'>", "event": "request_finished", "timestamp": "2021-01-09T19:06:51.829617Z", "logger": "django_structlog.middlewares.request", "level": "info"},
+    {"request_id": "03b09997-6b94-4955-a83d-460084471d7a", "user_id": null, "ip": "127.0.0.1", "request": "<WSGIRequest: GET '/favicon.ico'>", "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36", "event": "request_started", "timestamp": "2021-01-09T19:06:52.074974Z", "logger": "django_structlog.middlewares.request", "level": "info"},
+    {"request_id": "03b09997-6b94-4955-a83d-460084471d7a", "user_id": null, "ip": "127.0.0.1", "code": 404, "request": "<WSGIRequest: GET '/favicon.ico'>", "event": "request_finished", "timestamp": "2021-01-09T19:06:52.084570Z", "logger": "django_structlog.middlewares.request", "level": "info"}
+
+]

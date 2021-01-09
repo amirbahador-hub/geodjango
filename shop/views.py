@@ -2,18 +2,25 @@ import logging
 
 from django.shortcuts import render
 from .models import Product
+import structlog
 
-logger = logging.getLogger('dba')
+logger = structlog.get_logger('django_structlog')
+# logger = logging.getLogger('dba')
 
 
 def home(request):
     context = dict()
-    logger.warning({
-        'section': 'views',
-        'code': 'unexpected_error',
-        'object': 'صابون خوشبو',
-        'price': 459
-    })
+    logger.info(
+        product='رب گوجه',
+        weight=250,
+        brand='تبرک',
+    )
+    # logger.warning({
+    #     'section': 'views',
+    #     'code': 'unexpected_error',
+    #     'object': 'صابون خوشبو',
+    #     'price': 459
+    # })
     # logger.critical('critical message')
     # try:
     #     a = 13/0

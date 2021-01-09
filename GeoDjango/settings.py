@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_structlog.middlewares.RequestMiddleware',
 ]
 
 ROOT_URLCONF = 'GeoDjango.urls'
@@ -100,14 +101,20 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-import logging, logging.config
+
+import logging, logging.config, structlog
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
         "json": {
             '()': 'json_log_formatter.JSONFormatter',
-        }
+        },
+        "json_formatter": {
+            "()": structlog.stdlib.ProcessorFormatter,
+            "processor": structlog.processors.JSONRenderer(),
+        },
     },
     'handlers': {
         'my-json-file': {
@@ -119,6 +126,12 @@ LOGGING = {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
             'filename': 'geoDjangoLogs/mydebug.log',
+        },
+        "json_file": {
+            "class": "logging.handlers.WatchedFileHandler",
+            "filename": "logs/json.log",
+            "formatter": "json_formatter",
+            "encoding": "utf-8"
         },
     },
     'loggers': {
@@ -149,8 +162,30 @@ LOGGING = {
             'level': 'WARNING',
             'propagate': True,
         },
+        "django_structlog": {
+            "handlers": ["json_file"],
+            "level": "INFO",
+        },
     },
 }
+
+structlog.configure(
+    processors=[
+        structlog.stdlib.filter_by_level,
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.stdlib.add_logger_name,
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.PositionalArgumentsFormatter(),
+        structlog.processors.StackInfoRenderer(),
+        structlog.processors.format_exc_info,
+        # structlog.processors.UnicodeDecoder(encoding='utf-8'),
+        structlog.stdlib.ProcessorFormatter.wrap_for_formatter,
+    ],
+    # context_class=structlog.threadlocal.wrap_dict(dict),
+    logger_factory=structlog.stdlib.LoggerFactory(),
+    wrapper_class=structlog.stdlib.BoundLogger,
+    cache_logger_on_first_use=True,
+)
 
 
 
