@@ -104,7 +104,17 @@ import logging, logging.config
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        "json": {
+            '()': 'json_log_formatter.JSONFormatter',
+        }
+    },
     'handlers': {
+        'my-json-file': {
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': 'geoDjangoLogs/log.json',
+        },
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
@@ -133,7 +143,9 @@ LOGGING = {
             'propagate': True,
         },
         'dba': {
-            'handlers': ['file'],
+            'handlers': ['my-json-file'],
+            'class': 'logging.FileHandler',
+            'formatter': 'json',
             'level': 'WARNING',
             'propagate': True,
         },
