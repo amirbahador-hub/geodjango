@@ -12,7 +12,7 @@ class Product(models.Model):
         return self.title
 
     def __save__(self, *args, **kwargs):
-        logger.debug({
+        logger.warning({
             'section': 'views',
             'code': 'unexpected_error',
             'object': self.title,
