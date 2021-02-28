@@ -4,6 +4,16 @@ import logging
 logger = logging.getLogger('interface')
 
 
+class Zipcode(models.Model):
+    code = models.CharField(max_length=5)
+    poly = models.PolygonField()
+
+
+class Elevation(models.Model):
+    name = models.CharField(max_length=100)
+    rast = models.RasterField()
+
+    
 class WorldBorder(models.Model):
     # Regular Django fields corresponding to the attributes in the
     # world borders shapefile.
