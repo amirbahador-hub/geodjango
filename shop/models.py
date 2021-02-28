@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 
+
 import logging
 logger = logging.getLogger('interface')
 
