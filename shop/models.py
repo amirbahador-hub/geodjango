@@ -11,12 +11,12 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def __save__(self, *args, **kwargs):
-        logger.warning({
-            'section': 'views',
-            'code': 'unexpected_error',
-            'object': self.title,
-            'price': self.price
-        })
-        super().save(*args, **kwargs)
+    # def __save__(self, *args, **kwargs):
+    #     logger.warning({
+    #         'section': 'views',
+    #         'code': 'unexpected_error',
+    #         'object': self.title,
+    #         'price': self.price
+    #     })
+    #     super().save(*args, **kwargs)
 
